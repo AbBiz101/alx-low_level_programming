@@ -1,0 +1,15 @@
+#include <stdio.h>
+/**
+* main - entry point
+* Return: 0 after printing the function
+*/
+int main(void)
+{
+char c;
+for (c = 'z'; c >= 'a'; c--)
+{
+putchar(c);
+}
+putchar('\n');
+return (0);
+}
