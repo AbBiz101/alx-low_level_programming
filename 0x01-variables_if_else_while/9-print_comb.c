@@ -5,10 +5,10 @@
 */
 int main(void)
 {
-char c;
-for (c = '0'; c <= '8'; c++)
+int c;
+for (c = 0; c <= 8; c++)
 {
-putchar(c);
+putchar(c + 48);
 putchar(',');
 putchar(' ');
 }
