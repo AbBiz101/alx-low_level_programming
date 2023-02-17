@@ -1,12 +1,11 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 /**
  * main - entry point
- *
  * Return: 0 after printing the function
  */
-/* Task zero*/
+/* Task zero */
 int main(void)
 {
 int n;
@@ -14,9 +13,9 @@ srand(time(0));
 n = rand() - RAND_MAX / 2;
 if (n > 0)
 {
-pringf("%d is positive\n", n);
+printf("%d is positive\n", n);
 }
-else if (n == 0);
+else if (n == 0)
 {
 printf("%d is zero\n", n);
 }
