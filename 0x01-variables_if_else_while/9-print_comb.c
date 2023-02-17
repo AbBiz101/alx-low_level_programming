@@ -5,14 +5,16 @@
 */
 int main(void)
 {
-int c;
-for (c = 0; c <= 8; c++)
+int num;
+for (num = 0; num <= 8; num++)
 {
-putchar(c + 48);
+putchar(num + 48);
+if (num != 9)
+{
 putchar(',');
 putchar(' ');
 }
-putchar('9');
+}
 putchar('\n');
 return (0);
 }
