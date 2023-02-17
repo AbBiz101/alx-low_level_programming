@@ -10,6 +10,5 @@ for (letters = 'a'; letters <= 'Z'; letters++)
 {
 putchar(letters);
 }
-putchar('\n');
 return (0);
 }
