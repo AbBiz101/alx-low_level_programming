@@ -5,7 +5,6 @@
  * main - entry point
  * Return: 0 after printing the function
  */
-/* Task one */
 int main(void)
 {
 int n;
