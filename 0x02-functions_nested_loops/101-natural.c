@@ -1,15 +1,17 @@
 #include <stdio.h>
 /**
- * main - Entry point
+ * main - prints the sum of the multiples of 3 and 5
  * @void: void
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-int sum;
-for (int i = 0; i < 1024; i++)
+int n = 1024;
+int sum = 0;
+int i;
+for (i = 3; i < n; i++)
 {
-if (i % 5 == 0 || i % 3 == 0)
+if (i % 3 == 0 || i % 5 == 0)
 {
 sum += i;
 }
@@ -17,4 +19,3 @@ sum += i;
 printf("%d\n", sum);
 return (0);
 }
-
