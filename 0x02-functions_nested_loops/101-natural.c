@@ -1,9 +1,9 @@
 #include <stdio.h>
 /**
-* main - Entry point
-* @void: void
-* Return: Always 0 (Success)
-*/
+ * main - Entry point
+ * @void: void
+ * Return: Always 0 (Success)
+ */
 int main(void)
 {
 int sum;
