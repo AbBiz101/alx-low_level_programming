@@ -1,9 +1,9 @@
 #include "main.h"
 /**
- * print_times_table: prints n times table,
- * @num: takes in an integer
- * void: have no return value
- */
+* print_times_table- prints n times table
+* @num: takes in an integer
+* void: have no return value
+*/
 void print_times_table(int num)
 {
 int i, j, k;
