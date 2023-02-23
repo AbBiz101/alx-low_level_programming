@@ -11,20 +11,21 @@ for (j = 1; j <= 100; j++)
 {
 if (j % 3 == 0 && j % 5 == 0)
 {
-printf("FizzBuzz\n");
+printf("FizzBuzz ");
 }
 else if (j % 3 == 0)
 {
-printf("Fizz\n");
+printf("Fizz ");
 }
 else if (j % 5 == 0)
 {
-printf("Buzz\n");
+printf("Buzz ");
 }
 else
 {
-printf("%d\n", j);
+printf("%d ", j);
 }
 }
+printf("\n");
 return (0);
 }
