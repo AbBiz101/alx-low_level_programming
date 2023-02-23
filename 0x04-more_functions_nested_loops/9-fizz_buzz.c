@@ -26,6 +26,6 @@ else
 printf("%d\n", j);
 }
 }
-pintf("\n")
+pintf("\n");
 return (0);
 }
