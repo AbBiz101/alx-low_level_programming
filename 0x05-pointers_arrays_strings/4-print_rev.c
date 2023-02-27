@@ -9,10 +9,8 @@
 
 void print_rev(char *s)
 {
-char *s = "Hello,  world!";
 int i = 0;
 int j;
-int size;
 while (i >= 0)
 {
 if (s[i] == '\0')
@@ -24,8 +22,8 @@ i++;
 }
 while (j >= 0)
 {
-putchar(s[j]);
+_putchar(s[j]);
 j--;
 }
-putchar('\n');
+_putchar('\n');
 }
