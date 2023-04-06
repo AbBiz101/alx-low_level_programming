@@ -7,18 +7,22 @@
  */
 void print_binary(unsigned long int n)
 {
-	int i, flag = 0;
-	for (i = 63; i >= 0; i--)
-	{
-		if ((n >> i) & 1)
-		{
-			putchar('1');
-			flag = 1;
-		}
-		else if (flag)
-			putchar('0');
-	}
-	if (!flag)
-		putchar('0');
-	putchar('\n');
+int shift = sizeof(unsigned long int) * 8 - 1;
+unsigned long int mask = 1UL << shift;
+int printed = 0;
+while (mask > 0)
+{
+if (n & mask)
+{
+putchar('1');
+printed = 1;
+}
+else if (printed)
+{
+putchar('0');
+}
+mask >>= 1;
+}
+if (!printed)
+putchar('0');
 }
