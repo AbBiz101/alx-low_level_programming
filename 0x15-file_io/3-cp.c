@@ -23,18 +23,22 @@ exit(EXIT_FAILURE);
   * @argv: array of arguments
   * Return: 0.
   */
-
 int main(int argc, char **argv)
 {
+char *file_from;
+char *file_to;
+int fd_from;
+int fd_to;
+ssize_t nread;
+ssize_t nwritten;
+char buf[BUF_SIZE];
 if (argc != 3)
 {
 dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 exit(EXIT_FAILURE);
 }
-char *file_from = argv[1];
-char *file_to = argv[2];
-int fd_from;
-int fd_to;
+file_from = argv[1];
+file_to = argv[2];
 fd_from = open(file_from, O_RDONLY);
 if (fd_from == -1)
 	exitWithError("Can't read from file");
@@ -44,11 +48,9 @@ if (fd_to == -1)
 close(fd_from);
 exitWithError("Can't write to file");
 }
-ssize_t nread;
-char buf[BUF_SIZE];
 while ((nread = read(fd_from, buf, BUF_SIZE)) > 0)
 {
-ssize_t nwritten = write(fd_to, buf, nread);
+nwritten = write(fd_to, buf, nread);
 if (nwritten == -1)
 {
 close(fd_from);
@@ -68,3 +70,4 @@ if (close(fd_to) == -1)
 	exitWithError("Can't close fd");
 exit(EXIT_SUCCESS);
 }
+
