@@ -1,72 +1,60 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#define BUF_SIZE 1024
+#include "main.h"
 
 /**
-  * exitWithError - error-handling function
-  * @msg: message string
-  * Return: calls exit with EXIT_FAILURE.
-  */
+ * main - copy one file to another
+ * @argc: number of arguments
+ * @argv: array of arguments
+ * Return: 0 on success, or exit with error code
+ */
 
-void exitWithError(char *msg)
+int main(int argc, char *argv[])
 {
-dprintf(STDERR_FILENO, "Error: %s\n", msg);
-exit(EXIT_FAILURE);
-}
-
-/**
-  * main - copy one file to another
-  * @argc: list of arguments
-  * @argv: array of arguments
-  * Return: 0.
-  */
-
-int main(int argc, char **argv)
-{
-int fd_from;
-int fd_to;
-char *file_from;
-char *file_to;
-ssize_t nread;
-char buf[BUF_SIZE];
+int fd_from, fd_to, nread, nwrite;
+char buffer[1024];
 if (argc != 3)
 {
 dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-exit(EXIT_FAILURE);
+return (EXIT_FAILURE);
 }
-file_from = argv[1];
-file_to = argv[2];
-fd_from = open(file_from, O_RDONLY);
+fd_from = open(argv[1], O_RDONLY);
 if (fd_from == -1)
-	exitWithError("Can't read from file");
-fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+{
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+return (EXIT_FAILURE);
+}
+fd_to = open(argv[2], O_CREAT | O_TRUNC | O_WRONLY, 0664);
 if (fd_to == -1)
 {
-close(fd_from);
-exitWithError("Can't write to file");
+dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+return (EXIT_FAILURE);
 }
-while ((nread = read(fd_from, buf, BUF_SIZE)) > 0)
+while ((nread = read(fd_from, buffer, sizeof(buffer))) > 0)
 {
-ssize_t nwritten = write(fd_to, buf, nread);
-if (nwritten == -1)
+nwrite = write(fd_to, buffer, nread);
+if (nwrite != nread)
 {
+dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 close(fd_from);
 close(fd_to);
-exitWithError("Can't write to file");
+return (EXIT_FAILURE);
 }
 }
 if (nread == -1)
 {
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 close(fd_from);
 close(fd_to);
-exitWithError("Can't read from file");
+return (EXIT_FAILURE);
 }
 if (close(fd_from) == -1)
-	exitWithError("Can't close fd");
+{
+dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
+return (EXIT_FAILURE);
+}
 if (close(fd_to) == -1)
-	exitWithError("Can't close fd");
-exit(EXIT_SUCCESS);
+{
+dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
+return (EXIT_FAILURE);
+}
+return (EXIT_SUCCESS);
 }
