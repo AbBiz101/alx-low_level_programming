@@ -13,11 +13,11 @@ void close_file(int fd);
  */
 void close_file(int fd)
 {
-    if (close(fd) == -1)
-    {
-        perror("Error: Can't close file");
-        exit(100);
-    }
+if (close(fd) == -1)
+{
+perror("Error: Can't close file");
+exit(100);
+}
 }
 
 /**
@@ -34,47 +34,40 @@ void close_file(int fd)
  */
 int main(int argc, char *argv[])
 {
-    int from, to, r, w;
-    char buffer[BUFFER_SIZE];
-
-    if (argc != 3)
-    {
-        fprintf(stderr, "Usage: cp file_from file_to\n");
-        exit(97);
-    }
-
-    from = open(argv[1], O_RDONLY);
-    if (from == -1)
-    {
-        perror("Error: Can't read from file");
-        exit(98);
-    }
-
-    to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-    if (to == -1)
-    {
-        perror("Error: Can't write to file");
-        exit(99);
-    }
-
-    while ((r = read(from, buffer, BUFFER_SIZE)) > 0)
-    {
-        w = write(to, buffer, r);
-        if (w == -1)
-        {
-            perror("Error: Can't write to file");
-            exit(99);
-        }
-    }
-
-    if (r == -1)
-    {
-        perror("Error: Can't read from file");
-        exit(98);
-    }
-
-    close_file(from);
-    close_file(to);
-
-    return 0;
+int from, to, r, w;
+char buffer[BUFFER_SIZE];
+if (argc != 3)
+{
+fprintf(stderr, "Usage: cp file_from file_to\n");
+exit(97);
+}
+from = open(argv[1], O_RDONLY);
+if (from == -1)
+{
+perror("Error: Can't read from file");
+exit(98);
+}
+to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+if (to == -1)
+{
+perror("Error: Can't write to file");
+exit(99);
+}
+while ((r = read(from, buffer, BUFFER_SIZE)) > 0)
+{
+w = write(to, buffer, r);
+if (w == -1)
+{
+perror("Error: Can't write to file");
+exit(99);
+}
+}
+if (r == -1)
+{
+perror("Error: Can't read from file");
+exit(98);
+}
+close_file(from);
+close_file(to);
+return (0);
 }
